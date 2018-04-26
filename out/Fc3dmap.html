@@ -90,13 +90,21 @@
 
             <td class="type">
             
+                
+<span class="param-type">element</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last">容器</td>
         </tr>
 
     
@@ -108,13 +116,67 @@
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">一些配置信息可参考源码config/config.js文件</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -155,7 +217,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line206">line 206</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line208">line 208</a>
     </li></ul></dd>
     
 
@@ -243,7 +305,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line212">line 212</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line214">line 214</a>
     </li></ul></dd>
     
 
@@ -315,7 +377,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line217">line 217</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line219">line 219</a>
     </li></ul></dd>
     
 
@@ -444,7 +506,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line303">line 303</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line306">line 306</a>
     </li></ul></dd>
     
 
@@ -478,7 +540,7 @@
     
 
     
-    <h4 class="name" id="createViewer"><span class="type-signature"></span>createViewer<span class="signature">(elm, opt)</span><span class="type-signature"> &rarr; {null|Cesium.Viewer}</span></h4>
+    <h4 class="name" id="createFeature"><span class="type-signature"></span>createFeature<span class="signature">(opt, config)</span><span class="type-signature"></span></h4>
     
 
     
@@ -486,7 +548,7 @@
 
 
 <div class="description">
-    构建一个三维地图
+    添加一个要素
 </div>
 
 
@@ -522,7 +584,72 @@
 
         <tr>
             
-                <td class="name"><code>elm</code></td>
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">业务逻辑信息</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">配置信息
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>xField</code></td>
             
 
             <td class="type">
@@ -538,20 +665,20 @@
 
             
 
-            <td class="description last">document元素容器</td>
+            <td class="description last">x字段名</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>opt</code></td>
+                <td class="name"><code>yField</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object.&lt;string, *></span>
+<span class="param-type">string</span>
 
 
             
@@ -561,7 +688,201 @@
 
             
 
-            <td class="description last">相关配置，可参考超图的Sesium.Viewer</td>
+            <td class="description last">y字段名</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>xField</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">z字段名</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">样式配置
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">资源图片或者模型文件gltf加载路径</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">大小设置</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>graph</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">图形方式point|square|model 点|方|3d模型 不传就是加载图片的方式</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">颜色</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">大小缩放</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -602,7 +923,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line241">line 241</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line393">line 393</a>
     </li></ul></dd>
     
 
@@ -625,27 +946,164 @@
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">null</span>
-|
-
-<span class="param-type">Cesium.Viewer</span>
-
-
-    </dd>
-</dl>
+            
 
     
+
+    
+    <h4 class="name" id="createFeatures"><span class="type-signature"></span>createFeatures<span class="signature">(arr, config)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    批量创建要素
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object参考createFeature</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">参考createFeature</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line448">line 448</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -706,13 +1164,21 @@
 
             <td class="type">
             
+                
+<span class="param-type">Cesium.Cartesian3</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last">位置</td>
         </tr>
 
     
@@ -724,13 +1190,21 @@
 
             <td class="type">
             
+                
+<span class="param-type">Cesium.HeadingPitchRoll</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last">角度</td>
         </tr>
 
     
@@ -794,7 +1268,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line274">line 274</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line277">line 277</a>
     </li></ul></dd>
     
 
@@ -880,7 +1354,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line290">line 290</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line293">line 293</a>
     </li></ul></dd>
     
 
@@ -966,7 +1440,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line344">line 344</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line347">line 347</a>
     </li></ul></dd>
     
 
@@ -1070,7 +1544,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line355">line 355</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line358">line 358</a>
     </li></ul></dd>
     
 
@@ -1174,7 +1648,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line296">line 296</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line299">line 299</a>
     </li></ul></dd>
     
 
@@ -1322,7 +1796,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line328">line 328</a>
+        <a href="fc3dmap.js.html">fc3dmap.js</a>, <a href="fc3dmap.js.html#line331">line 331</a>
     </li></ul></dd>
     
 
@@ -1372,7 +1846,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Apr 25 2018 21:37:44 GMT+0800 (中国标准时间)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Apr 26 2018 11:05:44 GMT+0800 (中国标准时间)
 </footer>
 
 <script> prettyPrint(); </script>
