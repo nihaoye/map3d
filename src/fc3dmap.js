@@ -23,16 +23,19 @@ function Fc3dmap(elm,opt,config){
 
     Fc3dmap.prototype.init=function(){
         _self.createViewer(elm,opt);
-
-        _self.viewer.scene.open(_self.config.sceneUrl).then(function(layers){
-            _self.viewer.scene.layers.find('bulids').style3D.fillForeColor = new Cesium.Color(0.70, 0.70, 0.70);
-        });
-        _self.setCameraView(new Cesium.Cartesian3.fromDegrees(104.355, 28.705, 1e7), new Cesium.HeadingPitchRoll.fromDegrees(0, -90, 0));
-        let position=_self.config.initialPosition&&new Cesium.Cartesian3(_self.config.initialPosition[0],_self.config.initialPosition[1],_self.config.initialPosition[2]);
-        let orientation=_self.config.initialOrientation&&new Cesium.HeadingPitchRoll(_self.config.initialOrientation[0],_self.config.initialOrientation[1],_self.config.initialOrientation[2]);
-        _self.flyTo(position,orientation);
-        if(_self.config.zoneUrl){
-            createZoneLabel(_self.viewer,_self.config.zoneUrl,_self.config.zone);
+        if(_self.config.sceneUrl){
+            _self.viewer.scene.open(_self.config.sceneUrl).then(function(layers){
+                _self.viewer.scene.layers.find('bulids').style3D.fillForeColor = new Cesium.Color(0.70, 0.70, 0.70);
+            });
+        }
+        let position=_self.config.initialPosition&&new Cesium.Cartesian3.fromDegrees(_self.config.initialPosition[0],_self.config.initialPosition[1],_self.config.initialPosition[2]);
+        let orientation=_self.config.initialOrientation&&new Cesium.HeadingPitchRoll.fromDegrees(_self.config.initialOrientation[0],_self.config.initialOrientation[1],_self.config.initialOrientation[2]);
+        if(position&&orientation){
+           // _self.setCameraView(new Cesium.Cartesian3.fromDegrees(104.355, 28.705, 1e7), new Cesium.HeadingPitchRoll.fromDegrees(0, -90, 0));
+            _self.flyTo(position,orientation);
+        }
+        if(_self.config.zone&&_self.config.zone.url){
+            createZoneLabel(_self.viewer,_self.config.zone);
         }
     };
     /**
@@ -55,7 +58,7 @@ function Fc3dmap(elm,opt,config){
             navigationHelpButton:opt.navigationHelpButton||false,
             selectionIndicator:false,
             infoBox:false,
-            imageryProvider:opt.imageryProvider?opt.imageryProvider:(_self.config.mapUrl&&_self.config.mapUrl!==''&& new TDTMapImageryProvider({url: _self.config.mapUrl}))
+            imageryProvider:opt.imageryProvider?opt.imageryProvider:(_self.config.mapUrl&& new TDTMapImageryProvider({url: _self.config.mapUrl}))
         });
         _self.viewer._cesiumWidget._creditContainer.style.display = "none";
         return _self.viewer;
@@ -67,17 +70,25 @@ function Fc3dmap(elm,opt,config){
      * @param complete {function} 完成效果后的回调
      */
     Fc3dmap.prototype.flyTo=function(position, orientation, complete){
+        if(position===undefined){
+            position=_self.config.initialPosition;
+        }
         if(position instanceof Array){
-            position=new Cesium.Cartesian3(position[0],position[1],position[2]);
+            position=new Cesium.Cartesian3.fromDegrees(position[0],position[1],position[2]);
+        }
+        if(orientation===undefined){
+            orientation=_self.config.initialOrientation;
         }
         if(orientation instanceof Array){
-            orientation=new Cesium.HeadingPitchRoll(orientation[0],orientation[1],orientation[2]);
+            orientation=new Cesium.HeadingPitchRoll.fromDegrees(orientation[0],orientation[1],orientation[2]);
         }
-        _self.viewer.camera.flyTo({
-            destination: position,
-            orientation: orientation,
-            complete: complete
-        });
+        if(position&&orientation){
+            _self.viewer.camera.flyTo({
+                destination: position,
+                orientation: orientation,
+                complete: complete
+            });
+        }
     };
     /**
      * 地图全屏
@@ -103,9 +114,9 @@ function Fc3dmap(elm,opt,config){
         switch(mode){
             case 'scene':
                 orientation = new Cesium.HeadingPitchRoll(0, Cesium.Math.toRadians(-90.0), 0);
-                _self.flyTo(position, orientation, (function () {
+                _self.flyTo(position, orientation, function () {
                     _self.viewer.scene.mode = Cesium.SceneMode.SCENE2D;
-                }));
+                });
                 break;
             case 'map':
                 _self.viewer.scene.mode = Cesium.SceneMode.SCENE3D;
@@ -267,14 +278,13 @@ function Fc3dmap(elm,opt,config){
  * @private
  * 创建地名label
  * @param viewer
- * @param url
  * @param zoneConfig
  */
-function createZoneLabel(viewer,zoneUrl,zoneConfig){
+function createZoneLabel(viewer,zoneConfig){
     let disPlayConfig = zoneConfig;
     let marklayer = new Cesium.BillboardCollection();
     viewer.scene.primitives.add(marklayer);
-    Cesium.GeoJsonDataSource.load(zoneUrl).then(function(dataSource){
+    Cesium.GeoJsonDataSource.load(zoneConfig.url).then(function(dataSource){
         let entities = dataSource.entities.values;
         for (let i = 0; i < entities.length; i++) {
             let entity = entities[i];
