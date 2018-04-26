@@ -1,5 +1,5 @@
-import Overlay from './overlay';
-import Fc3dmap from './fc3dmap';
+import Overlay from './Overlay';
+import Cs3dmap from './Cs3dmap';
 
-window.Fc3dmap=Fc3dmap;
+window.Cs3dmap=Cs3dmap;
 window.Cesium.Overlay=Overlay;

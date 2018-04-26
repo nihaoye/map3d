@@ -1,6 +1,6 @@
 import cesiumConfig from './config/config'
 
-Fc3dmap.prototype.extend=function(dst) {
+Cs3dmap.prototype.extend=function(dst) {
     for (var i = 1, ii = arguments.length; i < ii; i++) {
         var obj = arguments[i];
         if (obj) {
@@ -203,7 +203,7 @@ function TDTMapImageryProvider(options) {
  * @param opt
  * @constructor
  */
-function Fc3dmap(elm, opt){
+function Cs3dmap(elm, opt){
     opt = opt || {};
     let _self=this;
     /**
@@ -216,29 +216,32 @@ function Fc3dmap(elm, opt){
      */
     this.viewer=null;
 
-    Fc3dmap.prototype.init=function(){
+    Cs3dmap.prototype.init=function(){
         _self.createViewer(elm,opt);
-
-        _self.viewer.scene.open(_self.config.sceneUrl).then(function(layers){
-            _self.viewer.scene.layers.find('bulids').style3D.fillForeColor = new Cesium.Color(0.70, 0.70, 0.70);
-        });
+        if(_self.config.sceneUrl){
+            _self.viewer.scene.open(_self.config.sceneUrl).then(function(layers){
+                _self.viewer.scene.layers.find('bulids').style3D.fillForeColor = new Cesium.Color(0.70, 0.70, 0.70);
+            });
+        }
         _self.setCameraView(new Cesium.Cartesian3.fromDegrees(104.355, 28.705, 1e7), new Cesium.HeadingPitchRoll.fromDegrees(0, -90, 0));
         let position=_self.config.initialPosition&&new Cesium.Cartesian3(_self.config.initialPosition[0],_self.config.initialPosition[1],_self.config.initialPosition[2]);
         let orientation=_self.config.initialOrientation&&new Cesium.HeadingPitchRoll(_self.config.initialOrientation[0],_self.config.initialOrientation[1],_self.config.initialOrientation[2]);
-        _self.flyTo(position,orientation);
+        if(position&&orientation){
+            _self.flyTo(position,orientation);
+        }
         if(_self.config.zoneUrl){
             createZoneLabel(_self.viewer,_self.config.zoneUrl,_self.config.zone);
         }
     };
 
-    Fc3dmap.prototype.TDTMapImageryProvider=TDTMapImageryProvider;
+    Cs3dmap.prototype.TDTMapImageryProvider=TDTMapImageryProvider;
     /**
      * 构建一个三维地图
      * @param elm{string} document元素容器
      * @param opt{Object<string,*>}  相关配置，可参考超图的Sesium.Viewer
      * @returns {null|Cesium.Viewer}
      */
-    Fc3dmap.prototype.createViewer=function(elm, opt){
+    Cs3dmap.prototype.createViewer=function(elm, opt){
         opt=opt||{};
 /*        var bubble=document.createElement('div');
         bubble.id='bubbleContainer_id';
@@ -271,9 +274,15 @@ function Fc3dmap(elm, opt){
      * @param orientation {Cesium.HeadingPitchRoll||Array} 角度
      * @param complete {function} 完成效果后的回调
      */
-    Fc3dmap.prototype.flyTo=function(position, orientation, complete){
+    Cs3dmap.prototype.flyTo=function(position, orientation, complete){
+        if(typeof position==='undefined'){
+            position=_self.config.initialPosition;
+        }
         if(position instanceof Array){
             position=new Cesium.Cartesian3(position[0],position[1],position[2]);
+        }
+        if(typeof position==='undefined'){
+            orientation=_self.config.initialOrientation;
         }
         if(orientation instanceof Array){
             orientation=new Cesium.HeadingPitchRoll(orientation[0],orientation[1],orientation[2]);
@@ -287,20 +296,20 @@ function Fc3dmap(elm, opt){
     /**
      * 地图全屏
      */
-    Fc3dmap.prototype.fullscreen=function(){
+    Cs3dmap.prototype.fullscreen=function(){
         Cesium.Fullscreen.requestFullscreen(_self.viewer.scene.canvas);
     };
     /**
      * 地图截屏
      */
-    Fc3dmap.prototype.screenshots=function(){
+    Cs3dmap.prototype.screenshots=function(){
         _self.viewer.scene.outputSceneToFile();
     };
     /**
      *模式转换,目前是三维和二维的转换
      * @param mode {string} 'scene'|'map' 默认是scene
      */
-    Fc3dmap.prototype.changeMode=function(mode){
+    Cs3dmap.prototype.changeMode=function(mode){
         mode=mode||'scene';
         let position = _self.getPosition();
         let orientation = null;
@@ -325,7 +334,7 @@ function Fc3dmap(elm, opt){
      * @param position {Cesium.Cartesian3|[x,y,z]}
      * @param orientation {Cesium.HeadingPitchRoll|[heading, pitch, roll]}
      */
-    Fc3dmap.prototype.setCameraView=function(position, orientation) {
+    Cs3dmap.prototype.setCameraView=function(position, orientation) {
         if(position instanceof Array){
             position=new Cesium.Cartesian3(position[0],position[1],position[2]);
         }
@@ -341,7 +350,7 @@ function Fc3dmap(elm, opt){
      * 获取相机旋转角
      * @returns {Cesium.HeadingPitchRoll}
      */
-    Fc3dmap.prototype.getCameraOrientation=function(){
+    Cs3dmap.prototype.getCameraOrientation=function(){
         let heading, pitch, roll;
         heading = _self.viewer.camera.heading;
         pitch = _self.viewer.camera.pitch;
@@ -352,25 +361,25 @@ function Fc3dmap(elm, opt){
      * 获取当前相机的位置
      * @returns {Cesium.Cartesian3}
      */
-    Fc3dmap.prototype.getPosition=function(){
+    Cs3dmap.prototype.getPosition=function(){
         return _self.viewer.camera.position;
     };
     _self.init();
 
-    Fc3dmap.prototype.createEntityCollection=function(opt){
+    Cs3dmap.prototype.createEntityCollection=function(opt){
         var eclt=new Cesium.EntityCollection(opt);
        // var ds=new Cesium.Datas;
          _self.viewer.dataSources.add(eclt);
         return eclt;
     };
 
-    Fc3dmap.prototype.addEntity=function(opt,entityCollection){
+    Cs3dmap.prototype.addEntity=function(opt,entityCollection){
         if(opt instanceof Cesium.Entity==false){
             opt=new Cesium.Entity(opt);
         }
         entityCollection.add(opt);
     };
-    Fc3dmap.prototype.createFeature=function(opt,config){
+    Cs3dmap.prototype.createFeature=function(opt,config){
         config=_self.extend({
             style:{
                 image:'Build/images/index/drawmark.png',
@@ -420,7 +429,7 @@ function Fc3dmap(elm, opt){
         //entity.setProperty('clients',opt);
         return entity;
     };
-    Fc3dmap.prototype.createFeatures=function(arr,config){
+    Cs3dmap.prototype.createFeatures=function(arr,config){
         var clt=new Cesium.EntityCollection();
         for(var i=0;i<arr.length;i++){
             clt.add(_self.createFeature(arr[i],config))
@@ -482,5 +491,5 @@ function createZoneLabel(viewer,zoneUrl,zoneConfig){
     })
 }
 
-export default Fc3dmap;
+export default Cs3dmap;
 

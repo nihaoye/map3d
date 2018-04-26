@@ -3,6 +3,6 @@ module.exports = {
     entry:'./src/index.js',
     output:{
         path:path.resolve(__dirname,'dist'),
-        filename:'fc3dmap.js'
+        filename:'cs3dmap.js'
     }
 };

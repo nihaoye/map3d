@@ -5,3 +5,4 @@
 - 初始化安装依赖 `npm install`
 - 控制台输入指令`webpack`
 - dist文件下的fc3dmap.js就是生成的基于cesium的开发的插件
+- `npm run doc`会生成对应的api文档(不知道为什么会报错)
