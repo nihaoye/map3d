@@ -227,10 +227,10 @@ function Fc3dmap(elm,opt,config){
                 id: opt.id,
                 position:new Cesium.Cartesian3.fromDegrees(opt[config.xField],opt[config.yField],opt[config.zField]||0),
                 size:config.style.size,
-                color:config.style.color,
+                color:config.style.color?Cesium.Color.fromCssColorString(config.style.color):Cesium.Color.BLUE,
                 point:{
-                    color:config.style.color,
-                    size:8
+                    color:config.style.color?Cesium.Color.fromCssColorString(config.style.color):Cesium.Color.BLUE,
+                    size:opt.size||10
                 }
             })
         }else if(config.style.graph=='model'){
