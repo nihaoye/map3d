@@ -1,7 +1,7 @@
 {
   "name": "fc3dmap",
   "version": "1.0.0",
-  "description": "三维底图快速开发",
+  "description": "基于cesium三维地图快速开发",
   "main": "index.js",
   "scripts": {
     "start": "webpack",
