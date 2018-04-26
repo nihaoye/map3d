@@ -8,7 +8,7 @@ window.Cesium.Viewer.prototype.addOverlay=function(overlay){
  * 3D场景气泡框,new 出来后要记得添加进去
  * @param opt {Object}
  * @param opt.id {property} id <br/>
- * @param opt.element {document.element} element元素<br/>
+ * @param opt.element {element|string} element元素或者元素id<br/>
  * @param opt.position {Array} 气泡框初始化的位置，可以不传<br/>
  *
  * @constructor
@@ -24,7 +24,7 @@ var Overlay= function(opt) {
     /**
      * @type {document.element} overlay的内容元素
      */
-    this.element = opt.element;
+    this.element = (typeof opt.element=='string')?document.getElementById(opt.element):opt.element;
     /**
      * @type {Array} 保存Popup框的x,y坐标
      */
@@ -100,6 +100,10 @@ var Overlay= function(opt) {
         }
         _self._worldPosition=position;
     };
+    /**
+     * @private
+     * 更新overlay
+     */
     this.update=function(){
         this.setPosition(this._worldPosition);
     };
