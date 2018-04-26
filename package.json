@@ -4,12 +4,15 @@
   "description": "三维底图快速开发",
   "main": "index.js",
   "scripts": {
-    "start":"webpack",
-    "doc":"jsdoc -c jsdoc.json -r"
+    "start": "webpack",
+    "doc": "jsdoc -c jsdoc.json -r"
   },
   "author": "zhangyuhao",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
     "webpack": "^3.11.0"
   }
 }
